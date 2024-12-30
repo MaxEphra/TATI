@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black; /* Alterado para fundo preto */
+    color: white; /* Alterado para letras brancas */
+}
+
+main {
+    max-width: 550px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resume {
+    display: flex;
+    padding: 10px 0;
+    gap: 40px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.resume > div {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px rgba(245, 244, 244, 0.5); /* Sombra mais suave e moderna */
+    border-radius: 10px;
+    padding: 15px;
+    width: 150px;
+    background-color: rgba(20, 16, 231, 0.1); /* Caixa com fundo semi-transparente */
+    color: white; /* Garante que o texto na caixa seja branco */
+}
+
+.newItem {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.divDesc, .divType, .divAmount {
+    display: flex;
+    flex-direction: column;
+}
+
+.newItem > button {
+    background-color: #FFD700; /* Botões em amarelo dourado */
+    color: black; /* Contraste para melhor legibilidade */
+    border: none;
+    padding: 0 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 34px;
+    transition: background-color 0.3s ease;
+}
+
+.newItem > button:hover {
+    background-color: #FFC107; /* Cor mais clara no hover */
+}
+
+input, select {
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    background-color: rgba(20, 16, 231, 0.1); /* Fundo semi-transparente */
+    color: greenyellow;
+}
+
+.divTable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 98%;
+    padding: 20px 0;
+    border-radius: 5px;
+    background-color: rgba(20, 16, 231, 0.1); /* Fundo da tabela semi-transparente */
+    color: white;
+}
+
+th {
+    text-align: start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* Linha mais moderna */
+    padding-bottom: 5px;
+}
+
+i {
+    font-size: 25px;
+}
+
+.bxs-chevron-up-circle {
+    color: greenyellow;
+}
+
+.bxs-chevron-down-circle {
+    color: #D83121;
+}
+
+.columnAction {
+    width: 40px;
+    text-align: center;
+}
+
+.columnAction > button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #FFD700; /* Cor dourada clara para o ícone */
+}
+
+.columnAction > button > i {
+    font-size: 25px;
+    color: #FFD700; /* Ícone da lixeira com cor dourada clara */
+}
+
+.columnAction > button:hover > i {
+    color: #FFC107; /* Cor mais clara no hover */
+}
+
+
+.columnAmount {
+    width: 30%;
+}
+
+.columnType {
+    width: 80px;
+    text-align: center;
+}
+
