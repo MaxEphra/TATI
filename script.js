@@ -2,36 +2,31 @@ const tbody = document.querySelector("tbody");
 const descItem = document.querySelector("#desc");
 const amount = document.querySelector("#amount");
 const type = document.querySelector("#type");
-const dueDate = document.querySelector("#dueDate"); // Campo para data de vencimento
+const dueDate = document.querySelector("#dueDate");
 const btnNew = document.querySelector("#btnNew");
 
 const incomes = document.querySelector(".incomes");
 const expenses = document.querySelector(".expenses");
 const total = document.querySelector(".total");
+const totalBox = document.querySelector(".totalBox");
 
 let items;
 
 btnNew.onclick = () => {
-  if (
-    descItem.value === "" ||
-    amount.value === "" ||
-    type.value === "" ||
-    dueDate.value === "" // Verifica se a data foi preenchida
-  ) {
+  if (!descItem.value || !amount.value || !type.value || !dueDate.value) {
     return alert("Preencha todos os campos!");
   }
 
   items.push({
     desc: descItem.value,
-    amount: Math.abs(amount.value).toFixed(2),
+    amount: parseFloat(amount.value).toFixed(2),
     type: type.value,
-    dueDate: dueDate.value, // Adiciona a data de vencimento ao objeto
+    dueDate: dueDate.value,
   });
 
   setItensBD();
   loadItens();
 
-  // Limpa os campos
   descItem.value = "";
   amount.value = "";
   type.value = "Entrada";
@@ -44,28 +39,18 @@ function deleteItem(index) {
   loadItens();
 }
 
-// Função para formatar valores no padrão brasileiro
-function formatCurrency(value) {
-  return value.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
-}
-
 function insertItem(item, index) {
   let tr = document.createElement("tr");
 
   tr.innerHTML = `
     <td>${item.desc}</td>
-    <td>${formatCurrency(Number(item.amount))}</td>
-    <td class="columnType">${
-      item.type === "Entrada"
-        ? '<i class="bx bxs-chevron-up-circle"></i>'
-        : '<i class="bx bxs-chevron-down-circle"></i>'
-    }</td>
-    <td>${new Date(item.dueDate).toLocaleDateString("pt-BR")}</td> <!-- Exibe a data formatada -->
-    <td class="columnAction">
-      <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
+    <td>R$ ${formatCurrency(item.amount)}</td>
+    <td>${item.type === "Entrada" ? "Entrada" : "Saída"}</td>
+    <td>${formatDate(item.dueDate)}</td>
+    <td>
+      <button onclick="deleteItem(${index})">
+        <i class="bx bx-trash"></i>
+      </button>
     </td>
   `;
 
@@ -75,37 +60,46 @@ function insertItem(item, index) {
 function loadItens() {
   items = getItensBD();
   tbody.innerHTML = "";
-  items.forEach((item, index) => {
-    insertItem(item, index);
-  });
-
-  getTotals();
+  items.forEach((item, index) => insertItem(item, index));
+  updateTotals();
 }
 
-function getTotals() {
-  const amountIncomes = items
-    .filter((item) => item.type === "Entrada")
-    .map((transaction) => Number(transaction.amount));
+function updateTotals() {
+  const incomeAmounts = items.filter((i) => i.type === "Entrada").map((i) => parseFloat(i.amount));
+  const expenseAmounts = items.filter((i) => i.type === "Saída").map((i) => parseFloat(i.amount));
 
-  const amountExpenses = items
-    .filter((item) => item.type === "Saída")
-    .map((transaction) => Number(transaction.amount));
+  const totalIncomes = incomeAmounts.reduce((acc, val) => acc + val, 0);
+  const totalExpenses = expenseAmounts.reduce((acc, val) => acc + val, 0);
 
-  const totalIncomes = amountIncomes.reduce((acc, cur) => acc + cur, 0);
-  const totalExpenses = Math.abs(
-    amountExpenses.reduce((acc, cur) => acc + cur, 0)
-  );
-  const totalItems = totalIncomes - totalExpenses;
+  const totalBalance = totalIncomes - totalExpenses;
 
-  // Formata os valores no padrão brasileiro
-  incomes.innerHTML = formatCurrency(totalIncomes);
-  expenses.innerHTML = formatCurrency(totalExpenses);
-  total.innerHTML = formatCurrency(totalItems);
+  incomes.textContent = `R$ ${formatCurrency(totalIncomes)}`;
+  expenses.textContent = `R$ ${formatCurrency(totalExpenses)}`;
+  total.textContent = `R$ ${formatCurrency(totalBalance)}`;
+
+  totalBox.classList.toggle("positive", totalBalance >= 0);
+  totalBox.classList.toggle("negative", totalBalance < 0);
 }
 
-const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
-const setItensBD = () =>
+function formatCurrency(value) {
+  return Number(value)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+\.)/g, "$&,")
+    .replace(".", ",");
+}
+
+function formatDate(date) {
+  const [year, month, day] = date.split("-");
+  return `${day}/${month}/${year.slice(2)}`; // Formato dd/mm/yy
+}
+
+function getItensBD() {
+  return JSON.parse(localStorage.getItem("db_items")) || [];
+}
+
+function setItensBD() {
   localStorage.setItem("db_items", JSON.stringify(items));
+}
 
 loadItens();
 
