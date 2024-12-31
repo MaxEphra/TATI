@@ -2,30 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+  <title>Gestão Financeira</title>
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
+    <h1>Olá Tatiane</h1>
     <div class="resume">
-      <div>
-        Entradas: R$
-        <br>
-        <span class="incomes">0.00</span>
+      <div class="box incomesBox">
+        <span>Entradas:</span>
+        <p class="amount incomes">R$ 0,00</p>
       </div>
-      <div>
-        Saídas: R$
-        <br>
-        <span class="expenses">0.00</span>
+      <div class="box expensesBox">
+        <span>Saídas:</span>
+        <p class="amount expenses">R$ 0,00</p>
       </div>
-      <div>
-        Total: R$
-        <br>
-        <span class="total">0.00</span>
+      <div class="box totalBox">
+        <span>Total:</span>
+        <p class="amount total">R$ 0,00</p>
       </div>
     </div>
     <div class="newItem">
@@ -40,8 +36,8 @@
       <div class="divType">
         <label for="type">Tipo</label>
         <select id="type">
-          <option>Entrada</option>
-          <option>Saída</option>
+          <option value="Entrada">Entrada</option>
+          <option value="Saída">Saída</option>
         </select>
       </div>
       <div class="divDueDate">
@@ -55,18 +51,16 @@
         <thead>
           <tr>
             <th>Descrição</th>
-            <th class="columnAmount">Valor</th>
-            <th class="columnType">Tipo</th>
+            <th>Valor</th>
+            <th>Tipo</th>
             <th>Vencimento</th>
-            <th class="columnAction"></th>
+            <th>Ação</th>
           </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
-  </main>  
-
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
