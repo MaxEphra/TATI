@@ -1,127 +1,186 @@
+/* Reset básico */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #4158D0;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);    
-    text-align: center;
-  }
-  
-  h1 {
-    margin: 20px 0;
-    font-size: 2rem;
-    color: #fff;
-  }
-  
-  .resume {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-  }
-  
-  .box {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    width: 250px;
-    text-align: center;
-  }
-  
-  .box span {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-    font-size: 1rem;
-  }
-  
-  .amount {
-    font-size: 1.5rem;
-    word-wrap: break-word;
-  }
-  
-  .incomesBox .amount {
-    color: green;
-  }
-  
-  .expensesBox .amount {
-    color: red;
-  }
-  
-  .totalBox .amount {
-    color: black;
-  }
-  
-  .totalBox.positive .amount {
-    color: green;
-  }
-  
-  .totalBox.negative .amount {
-    color: red;
-  }
-  
-  .newItem {
-    margin: 20px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .newItem div {
-    display: flex;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: flex-start; /* Alinha os itens à esquerda */
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+  flex: 1 1 calc(25% - 10px);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+button#btnNew {
+  background-color: #ffc107;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button#btnNew:hover {
+  background-color: #e0a800;
+}
+
+.box-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* Alinha os boxes à esquerda */
+}
+
+.box {
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  flex: 1 1 calc(30% - 10px);
+  text-align: center;
+}
+
+.incomes .value {
+  color: #28a745;
+}
+
+.expenses .value {
+  color: #dc3545;
+}
+
+.total .value {
+  color: #000;
+}
+
+.total.positive .value {
+  color: #28a745;
+}
+
+.total.negative .value {
+  color: #dc3545;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  word-wrap: break-word;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left; /* Garantir que o texto está alinhado à esquerda */
+}
+
+thead {
+  background-color: #ddd;
+  color: #000;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #121212;
+}
+
+button i {
+  color: green;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+button i:hover {
+  color: #a71d2a;
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .form-container {
     flex-direction: column;
   }
-  
-  input, select, button {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
+
+  .form-container input,
+  .form-container select,
+  .form-container button {
+    flex: 1 1 100%;
   }
-  
-  button {
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+
+  .box-group {
+    flex-direction: column;
   }
-  
-  button:hover {
-    background-color: #0056b3;
+
+  .box {
+    flex: 1 1 100%;
   }
-  
-  .divTable {
-    margin: 20px auto;
-    max-width: 90%;
-    overflow-x: auto;
-  }
-  
+
   table {
-    width: 100%;
-    border-collapse: collapse;
+    font-size: 0.9rem;
   }
-  
-  thead {
-    background-color: #007bff;
-    color: white;
+
+  table thead {
+    display: none;
   }
-  
-  thead th {
-    padding: 10px;
-    text-align: center;
+
+  table tr {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
   }
-  
-  tbody td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
+
+  table td {
+    display: flex;
+    flex: 1 1 50%; /* Colunas lado a lado */
+    justify-content: flex-start; /* Alinha os itens à esquerda */
+    padding: 5px;
+    align-items: center;
   }
-  
-  tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
+
+  table td:before {
+    content: attr(data-label); /* Adicionar rótulo para cada célula */
+    font-weight: bold;
+    margin-right: 10px;
   }
-  
+}
+
+/* Estilo para o campo de data com ícone */
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 10px; /* Coloca o ícone do calendário no lado direito */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  filter: invert(1); /* Ajusta o ícone para contraste em fundo escuro */
+}
+
 
